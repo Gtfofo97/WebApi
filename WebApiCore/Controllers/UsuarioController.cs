@@ -12,17 +12,17 @@ namespace WebApiCore.Controllers
     [EnableCors("_myAllowSpecificOrigins")]
     public class UsuarioController : ControllerBase
     {
-        private readonly IRepositorioUsuario repositorioUsuario;
-        public UsuarioController (IRepositorioUsuario iuser)
+        private readonly IUnitOfWork unitofwork;
+        public UsuarioController (IUnitOfWork iuser)
         {
-            repositorioUsuario = iuser;
+            unitofwork = iuser;
         }
         [HttpGet]
         public async Task<ActionResult<List<Usuario>>> Get()
         {
             try
             {
-                return Ok(await repositorioUsuario.GetAllAsync());
+                return Ok(await unitofwork.RepositorioUsuario.GetAllAsync());
 
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                await repositorioUsuario.InsertAsync(model);
+                await unitofwork.RepositorioUsuario.InsertAsync(model);
                 return Ok();
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                await repositorioUsuario.DeleteAsync(Id);
+                await unitofwork.RepositorioUsuario.DeleteAsync(Id);
                 return Ok();
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                var usuario = await repositorioUsuario.GetByIdAsync(Id);
+                var usuario = await unitofwork.RepositorioUsuario.GetByIdAsync(Id);
                 if (usuario == null)
                     return NotFound();
                 return Ok(usuario);
@@ -84,10 +84,10 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                var existUsuario = await repositorioUsuario.GetByIdAsync(model.Id);
+                var existUsuario = await unitofwork.RepositorioUsuario.GetByIdAsync(model.Id);
                 if (existUsuario == null)
                     return NotFound();
-                await repositorioUsuario.UpdateAsync(model);
+                await unitofwork.RepositorioUsuario.UpdateAsync(model);
                 return Ok();
             }
             catch (Exception ex)

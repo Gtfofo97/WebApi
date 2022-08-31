@@ -1,3 +1,4 @@
+using WebApiCore.Persistencia;
 using WebApiCore.Repositorio;
 using WebApiCore.Repositorio.Contracts;
 
@@ -11,9 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
-builder.Services.AddScoped<IRepositorioRol, RepositorioRol>();
-builder.Services.AddScoped<IRepositorioRolUsuario, RepositorioRolUsuario>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddCors(options =>
 {
