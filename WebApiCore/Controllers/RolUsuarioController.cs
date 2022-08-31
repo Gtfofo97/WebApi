@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCore.Models;
 using WebApiCore.Repositorio.Contracts;
@@ -7,6 +8,7 @@ namespace WebApiCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("_myAllowSpecificOrigins")]
     public class RolUsuarioController : ControllerBase
     {
         private readonly IUnitOfWork unitofwork;
