@@ -9,10 +9,10 @@ namespace WebApiCore.Controllers
     [ApiController]
     public class RolController : ControllerBase
     {
-        private readonly IRepositorioRol repositorioRol;
-        public RolController (IRepositorioRol irol)
+        private readonly IUnitOfWork unitofwork;
+        public RolController (IUnitOfWork irol)
         {
-            repositorioRol = irol;
+            unitofwork = irol;
         }
 
         [HttpGet]
@@ -20,7 +20,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                return Ok(await repositorioRol.GetAllAsync());
+                return Ok(await unitofwork.RepositorioRol.GetAllAsync());
             }
             catch (Exception ex)
             {
@@ -34,7 +34,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                await repositorioRol.InsertAsync(model);
+                await unitofwork.RepositorioRol.InsertAsync(model);
                 return Ok();
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                await repositorioRol.DeleteAsync(Id);
+                await unitofwork.RepositorioRol.DeleteAsync(Id);
                 return Ok();
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace WebApiCore.Controllers
         {
             try
             {
-                await repositorioRol.UpdateAsync(model);
+                await unitofwork.RepositorioRol.UpdateAsync(model);
                 return Ok();
             }
             catch (Exception ex)
