@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using WebApiCore.Models.BaseModel;
 
 namespace WebApiCore.Models
 {
-    public class RolUsuario
+    public class RolUsuario : GenericModel
     {
         public long IdUsuario { get; set; }
         public long IdRol { get; set; }
